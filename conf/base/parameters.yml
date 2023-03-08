@@ -1,3 +1,9 @@
+companies:
+  - 'amil'
+  - 'bradesco'
+  - 'porto'
+  - 'sulamerica'
+  - 'unimed'
 appstoreapps: 
   - 'amil-clientes'
   - 'bradesco-saúde'
@@ -11,4 +17,5 @@ googleplayapps:
   - 'br.com.sulamerica.sam.saude'
   - 'br.com.app.centralnacionalunimed'
 country: 'br'
+language: 'pt-br'
 storeid: 'store_id'

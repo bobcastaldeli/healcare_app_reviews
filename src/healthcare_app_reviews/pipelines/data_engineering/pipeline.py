@@ -4,7 +4,7 @@ generated using Kedro 0.18.6
 """
 
 from kedro.pipeline import Pipeline, node, pipeline
-from .nodes import download_appstore_reviews
+from .nodes import download_appstore_reviews, dowload_googleplay_reviews
 
 
 def create_pipeline(**kwargs) -> Pipeline:
@@ -15,6 +15,12 @@ def create_pipeline(**kwargs) -> Pipeline:
                 inputs=['parameters'],
                 outputs='appstore_reviews_raw',
                 name='download_appstore_reviews',
+            ),
+            node(
+                func=dowload_googleplay_reviews,
+                inputs=['parameters'],
+                outputs='googleplay_reviews_raw',
+                name='download_googleplay_reviews',
             ),
         ]
     )
