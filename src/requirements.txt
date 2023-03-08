@@ -16,3 +16,4 @@ sqlalchemy
 pymysql
 google-play-scraper
 app-store-scraper
+chardet

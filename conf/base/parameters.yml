@@ -1,0 +1,14 @@
+appstoreapps: 
+  - 'amil-clientes'
+  - 'bradesco-saúde'
+  - 'porto-saúde'
+  - 'sulamérica-saúde'
+  - 'unimed-cliente'
+googleplayapps:
+  - 'br.com.amil.beneficiarios'
+  - 'br.com.bradseg.segurobradescosaude'
+  - 'br.com.portoseguro.saudeodonto'
+  - 'br.com.sulamerica.sam.saude'
+  - 'br.com.app.centralnacionalunimed'
+country: 'br'
+storeid: 'store_id'
