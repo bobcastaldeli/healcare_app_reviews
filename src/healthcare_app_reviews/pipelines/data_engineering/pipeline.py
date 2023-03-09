@@ -4,7 +4,12 @@ generated using Kedro 0.18.6
 """
 
 from kedro.pipeline import Pipeline, node, pipeline
-from .nodes import download_appstore_reviews, dowload_googleplay_reviews
+from .nodes import (
+    download_appstore_reviews, 
+    dowload_googleplay_reviews,
+    rename_columns,
+    append_dataframes
+)
 
 
 def create_pipeline(**kwargs) -> Pipeline:
@@ -21,6 +26,18 @@ def create_pipeline(**kwargs) -> Pipeline:
                 inputs=['parameters'],
                 outputs='googleplay_reviews_raw',
                 name='download_googleplay_reviews',
+            ),
+            node(
+                func=rename_columns,
+                inputs=['googleplay_reviews_raw', 'parameters'],
+                outputs='googleplay_reviews_intermediate',
+                name='rename_googleplay_columns',
+            ),
+            node(
+                func=append_dataframes,
+                inputs=['appstore_reviews_raw', 'googleplay_reviews_intermediate', 'parameters'],
+                outputs='reviews_primary',
+                name='append_dataframes',
             ),
         ]
     )

@@ -19,3 +19,14 @@ googleplayapps:
 country: 'br'
 language: 'pt-br'
 storeid: 'store_id'
+renamedcolumns:
+  at: 'date'
+  content: 'review'
+  score: 'rating'
+selectedcolumns:
+  - 'userName'
+  - 'date'
+  - 'company'
+  - 'store_id'
+  - 'review'
+  - 'rating'

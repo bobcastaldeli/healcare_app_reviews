@@ -11,3 +11,11 @@ appstore_reviews_raw:
 googleplay_reviews_raw:
   type: pandas.CSVDataSet
   filepath: data/01_raw/googleplay_reviews.csv
+
+googleplay_reviews_intermediate:
+  type: pandas.CSVDataSet
+  filepath: data/02_intermediate/googleplay_reviews.csv
+
+reviews_primary:
+  type: pandas.CSVDataSet
+  filepath: data/03_primary/reviews.csv

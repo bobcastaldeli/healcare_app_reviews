@@ -5,7 +5,7 @@ generated using Kedro 0.18.6
 
 import time
 import logging
-from typing import Any, Callable, Dict, Tuple
+from typing import Any, Callable, Dict, Tuple, List
 import numpy as np
 import pandas as pd
 from app_store_scraper import AppStore
@@ -67,3 +67,31 @@ def dowload_googleplay_reviews(parameters: Dict[str, Any]) -> pd.DataFrame:
         reviews_df = pd.concat([reviews_df, rvws_df])
         time.sleep(120)
     return reviews_df
+
+
+def rename_columns(dataframe: pd.DataFrame, parameters: Dict[str, Any]) -> pd.DataFrame:
+    """Node for renaming columns
+    Args:
+        dataframe: A pandas dataframe.
+        parameters: A dictionary of parameters.
+    Returns:
+        pd.DataFrame: The data from the node.
+    """
+    reviews_renamed = dataframe.rename(columns=parameters["renamedcolumns"])
+    return reviews_renamed
+
+
+def append_dataframes(dataframe1: pd.DataFrame, dataframe2: pd.DataFrame, parameters: Dict[str, Any]) -> pd.DataFrame:
+    """Node for appending dataframes
+    Args:
+        dataframe1: A pandas dataframe.
+        dataframe2: A pandas dataframe.
+        parameters: A dictionary of parameters.
+    Returns:
+        pd.DataFrame: The data from the node.
+    """
+    # select columns for dataframe1 and dataframe2 at the same time
+    dataframe1 = dataframe1[parameters["selectedcolumns"]]
+    dataframe2 = dataframe2[parameters["selectedcolumns"]]
+    reviews = pd.concat([dataframe1, dataframe2])
+    return reviews
