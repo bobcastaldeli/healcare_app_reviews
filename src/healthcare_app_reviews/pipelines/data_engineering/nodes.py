@@ -95,3 +95,18 @@ def append_dataframes(dataframe1: pd.DataFrame, dataframe2: pd.DataFrame, parame
     dataframe2 = dataframe2[parameters["selectedcolumns"]]
     reviews = pd.concat([dataframe1, dataframe2])
     return reviews
+
+
+def clean_review(dataframe: pd.DataFrame, parameters: Dict[str, Any]) -> pd.DataFrame:
+    """Node for cleaning reviews text
+    Args:
+        dataframe: A pandas dataframe.
+        parameters: A dictionary of parameters.
+    Returns:
+        pd.DataFrame: The data from the node.
+    """
+    dataframe[parameters["textcolumn"]] = dataframe[parameters["textcolumn"]].str.lower()
+    dataframe[parameters["textcolumn"]] = dataframe[parameters["textcolumn"]].str.replace(r"[^\w\s]+", "")
+    dataframe[parameters["textcolumn"]] = dataframe[parameters["textcolumn"]].str.replace(r"\n", " ")
+    dataframe[parameters["textcolumn"]] = dataframe[parameters["textcolumn"]].astype(str)
+    return dataframe

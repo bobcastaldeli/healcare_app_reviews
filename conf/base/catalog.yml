@@ -19,3 +19,7 @@ googleplay_reviews_intermediate:
 reviews_primary:
   type: pandas.CSVDataSet
   filepath: data/03_primary/reviews.csv
+
+reviews_features:
+  type: pandas.CSVDataSet
+  filepath: data/04_features/reviews.csv

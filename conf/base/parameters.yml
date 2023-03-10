@@ -30,3 +30,4 @@ selectedcolumns:
   - 'store_id'
   - 'review'
   - 'rating'
+textcolumn: 'review'

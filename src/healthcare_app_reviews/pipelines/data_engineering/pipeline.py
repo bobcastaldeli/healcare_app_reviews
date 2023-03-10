@@ -8,7 +8,8 @@ from .nodes import (
     download_appstore_reviews, 
     dowload_googleplay_reviews,
     rename_columns,
-    append_dataframes
+    append_dataframes,
+    clean_review
 )
 
 
@@ -39,5 +40,11 @@ def create_pipeline(**kwargs) -> Pipeline:
                 outputs='reviews_primary',
                 name='append_dataframes',
             ),
+            node(
+                func=clean_review,
+                inputs=['reviews_primary', 'parameters'],
+                outputs='reviews_features',
+                name='clean_review',
+            )
         ]
     )
