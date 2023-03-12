@@ -12,6 +12,14 @@ from sklearn.model_selection import train_test_split
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import LabelEncoder
 from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import (
+    accuracy_score, 
+    balanced_accuracy_score, 
+    precision_score, 
+    recall_score, 
+    f1_score, 
+    roc_auc_score
+)
 from embetter.grab import ColumnGrabber
 from embetter.text import SentenceEncoder
 
@@ -65,3 +73,47 @@ def train_model(
     )
     pipeline.fit(train_features, train_label)
     return pipeline, label_encoder
+
+
+def predict_model(
+    model: Tuple[Callable, Dict[str, Any]], test_set: pd.DataFrame, parameters: Dict[str, Any]
+) -> pd.DataFrame:
+    """Node for predicting the test set.
+    Args:
+        model: The trained model.
+        X_test: The test set features.
+    Returns:
+        y_pred: The predicted targets.
+    """
+    pipeline = model
+    test_set[parameters["textcolumn"]] = test_set[parameters["textcolumn"]].astype(str)
+    test_features = pd.DataFrame(test_set[parameters["textcolumn"]])
+    y_pred = pd.DataFrame(pipeline.predict(test_features))
+    return y_pred
+
+
+def evaluate_model(
+    test_set: pd.DataFrame, y_pred: pd.DataFrame, label: Tuple[Callable, Dict[str, Any]], parameters: Dict[str, Any]
+) -> Dict[str, Any]:
+    """Node for evaluating the model.
+    Args:
+        y_test: The test set targets.
+        y_pred: The predicted targets.
+        model: The trained model.
+    Returns:
+        scores: A dictionary of evaluation scores.
+    """
+    label_encoder = label
+    y_test = pd.DataFrame(test_set[parameters["sentimentcolumn"]])
+    y_test = label_encoder.transform(y_test)
+    scores = {
+        "accuracy": accuracy_score(y_test, y_pred),
+        "balanced_accuracy": balanced_accuracy_score(y_test, y_pred),
+        "precision": precision_score(y_test, y_pred, average="macro"),
+        "recall": recall_score(y_test, y_pred, average="macro"),
+        "f1": f1_score(y_test, y_pred, average="macro"),
+        "roc_auc": roc_auc_score(y_test, y_pred, average="macro"),
+    }
+    # transform scores to a dataframe
+    scores = pd.DataFrame(scores, index=[0])
+    return scores
