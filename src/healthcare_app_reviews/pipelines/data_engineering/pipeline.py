@@ -42,7 +42,7 @@ def create_pipeline(**kwargs) -> Pipeline:
             ),
             node(
                 func=clean_review,
-                inputs='reviews_primary',
+                inputs=['reviews_primary', 'parameters'],
                 outputs='reviews_clean',
                 name='clean_review',
             ),

@@ -22,7 +22,7 @@ reviews_primary:
 
 reviews_clean:
   type: pandas.CSVDataSet
-  filepath: data/04_feature/reviews.csv
+  filepath: data/04_feature/reviews_clean.csv
 
 train_set:
   type: pandas.CSVDataSet

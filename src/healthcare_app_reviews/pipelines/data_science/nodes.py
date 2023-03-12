@@ -34,7 +34,7 @@ def split_data(
         y_test: The test set targets.
     """
     train, test = train_test_split(
-        reviews_clean[['review', 'sentiment']],
+        reviews_clean[[parameters['textcolumn'], parameters['sentimentcolumn']]],
         test_size=parameters["testsize"],
         random_state=parameters["randomseed"],
     )
@@ -53,7 +53,7 @@ def train_model(
         pipeline: The pickle pipeline.
     """
     train_set[parameters["textcolumn"]] = train_set[parameters["textcolumn"]].astype(str)
-    X_train = pd.DataFrame(train_set[parameters["textcolumn"]])
+    train_features = pd.DataFrame(train_set[parameters["textcolumn"]])
     y_train = pd.DataFrame(train_set[parameters["sentimentcolumn"]])
     label_encoder = LabelEncoder()
     label_encoder.fit(y_train)
@@ -63,6 +63,5 @@ def train_model(
         SentenceEncoder(parameters["sentencemodel"]),
         LogisticRegression(random_state=parameters["randomseed"]),
     )
-    pipeline.fit(X_train, train_label)
-
+    pipeline.fit(train_features, train_label)
     return pipeline, label_encoder
