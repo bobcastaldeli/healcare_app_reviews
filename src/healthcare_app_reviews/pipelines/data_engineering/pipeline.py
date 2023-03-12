@@ -9,7 +9,7 @@ from .nodes import (
     dowload_googleplay_reviews,
     rename_columns,
     append_dataframes,
-    clean_review
+    clean_review,
 )
 
 
@@ -42,9 +42,9 @@ def create_pipeline(**kwargs) -> Pipeline:
             ),
             node(
                 func=clean_review,
-                inputs=['reviews_primary', 'parameters'],
-                outputs='reviews_features',
+                inputs='reviews_primary',
+                outputs='reviews_clean',
                 name='clean_review',
-            )
+            ),
         ]
     )

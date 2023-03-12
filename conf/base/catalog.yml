@@ -20,6 +20,24 @@ reviews_primary:
   type: pandas.CSVDataSet
   filepath: data/03_primary/reviews.csv
 
-reviews_features:
+reviews_clean:
   type: pandas.CSVDataSet
-  filepath: data/04_features/reviews.csv
+  filepath: data/04_feature/reviews.csv
+
+train_set:
+  type: pandas.CSVDataSet
+  filepath: data/05_model_input/train.csv
+
+test_set:
+  type: pandas.CSVDataSet
+  filepath: data/05_model_input/test.csv
+
+model:
+  type: pickle.PickleDataSet
+  filepath: data/06_models/model.pkl
+  backend: pickle
+
+labels:
+  type: pickle.PickleDataSet
+  filepath: data/06_models/labels.pkl
+  backend: pickle

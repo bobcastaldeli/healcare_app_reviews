@@ -17,3 +17,7 @@ pymysql
 google-play-scraper
 app-store-scraper
 chardet
+sklearn
+embetter[text]
+sentence-transformers
+optuna

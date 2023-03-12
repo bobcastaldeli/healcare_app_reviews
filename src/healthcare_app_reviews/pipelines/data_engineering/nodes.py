@@ -90,23 +90,27 @@ def append_dataframes(dataframe1: pd.DataFrame, dataframe2: pd.DataFrame, parame
     Returns:
         pd.DataFrame: The data from the node.
     """
-    # select columns for dataframe1 and dataframe2 at the same time
     dataframe1 = dataframe1[parameters["selectedcolumns"]]
     dataframe2 = dataframe2[parameters["selectedcolumns"]]
     reviews = pd.concat([dataframe1, dataframe2])
     return reviews
 
 
-def clean_review(dataframe: pd.DataFrame, parameters: Dict[str, Any]) -> pd.DataFrame:
+def clean_review(dataframe: pd.DataFrame) -> pd.DataFrame:
     """Node for cleaning reviews text
     Args:
         dataframe: A pandas dataframe.
         parameters: A dictionary of parameters.
-    Returns:
+    Returns:,
         pd.DataFrame: The data from the node.
     """
-    dataframe[parameters["textcolumn"]] = dataframe[parameters["textcolumn"]].str.lower()
-    dataframe[parameters["textcolumn"]] = dataframe[parameters["textcolumn"]].str.replace(r"[^\w\s]+", "")
-    dataframe[parameters["textcolumn"]] = dataframe[parameters["textcolumn"]].str.replace(r"\n", " ")
-    dataframe[parameters["textcolumn"]] = dataframe[parameters["textcolumn"]].astype(str)
-    return dataframe
+    dataframe['sentiment'] = [
+        'positivo' if x <= 4 else 'negativo' for x in dataframe['rating']
+    ]
+    dataframe['review'] = dataframe['review'].str.lower()
+    dataframe['review'] = dataframe['review'].str.replace(r'[^\w\s]+', '')
+    dataframe['review'] = dataframe['review'].str.replace(r'\n', ' ')   
+    reviews = dataframe.dropna(subset=['review'])
+    reviews = reviews[reviews['review'] != '']
+    reviews['review'] = reviews['review'].astype(str)
+    return reviews

@@ -31,3 +31,8 @@ selectedcolumns:
   - 'review'
   - 'rating'
 textcolumn: 'review'
+ratingcolumn: 'rating'
+sentimentcolumn: 'sentiment'
+randomseed: 42
+testsize: 0.2
+sentencemodel: 'distiluse-base-multilingual-cased-v1'
