@@ -104,7 +104,7 @@ def clean_review(dataframe: pd.DataFrame, parameters: Dict[str, Any]) -> pd.Data
         pd.DataFrame: The data from the node.
     """
     dataframe[parameters['sentimentcolumn']] = [
-        'positivo' if x <= 4 else 'negativo' for x in dataframe[parameters['ratingcolumn']]
+        'positivo' if x >= 4 else 'negativo' for x in dataframe[parameters['ratingcolumn']]
     ]
     dataframe[parameters['textcolumn']] = dataframe[parameters['textcolumn']].str.lower()
     dataframe[parameters['textcolumn']] = dataframe[parameters['textcolumn']].str.replace(r'[^\w\s]+', '')

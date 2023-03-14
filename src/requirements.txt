@@ -21,3 +21,7 @@ sklearn
 embetter[text]
 sentence-transformers
 optuna
+fastapi
+uvicorn
+pydantic
+streamlit
